@@ -23,9 +23,14 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.rest-assured:rest-assured'
+	testImplementation 'org.assertj:assertj-core:3.19.0'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
@@ -37,6 +42,8 @@ test {
 }
 
 dependencies {
+
+	testImplementation 'org.projectlombok:lombok:1.18.22'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
