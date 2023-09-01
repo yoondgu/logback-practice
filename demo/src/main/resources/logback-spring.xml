@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <timestamp key="DATE_FORMAT" datePattern="yyyy-MM-dd"/>
 
@@ -6,15 +7,35 @@
     <property name="LOG_PATTERN_COLORED" value="%green(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] ${PID} %highlight(%-5level) %cyan(%logger) - %msg%n" />
     <property name="FILE_DATE_TIME_FORMAT" value="${DATE_FORMAT}' T 'HH:mm:ss.SSS" />
 
-    <include resource="console-appender.xml"/>
-    <include resource="file-info-appender.xml"/>
-    <include resource="file-warn-appender.xml"/>
-    <include resource="file-error-appender.xml"/>
+    <springProfile name="!prod, !dev">
+        <include resource="console-appender.xml"/>
 
-    <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE_INFO"/>
-        <appender-ref ref="FILE_WARN"/>
-        <appender-ref ref="FILE_ERROR"/>
-    </root>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <include resource="file-debug-appender.xml"/>
+        <include resource="file-warn-appender.xml"/>
+        <include resource="file-error-appender.xml"/>
+
+        <root level="DEBUG">
+            <appender-ref ref="FILE_DEBUG"/>
+            <appender-ref ref="FILE_WARN"/>
+            <appender-ref ref="FILE_ERROR"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <include resource="file-info-appender.xml"/>
+        <include resource="file-warn-appender.xml"/>
+        <include resource="file-error-appender.xml"/>
+
+        <root level="INFO">
+            <appender-ref ref="FILE_INFO"/>
+            <appender-ref ref="FILE_WARN"/>
+            <appender-ref ref="FILE_ERROR"/>
+        </root>
+    </springProfile>
 </configuration>

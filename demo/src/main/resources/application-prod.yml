@@ -7,8 +7,9 @@ spring:
       ddl-auto: none
 
 logging:
+  # 프로젝트 파일에서는 실제 EC2 경로
   file:
-    path: /home/ubuntu/backend/build/log
+    path: ./log
 
 
 
