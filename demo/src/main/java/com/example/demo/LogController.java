@@ -2,6 +2,7 @@ package com.example.demo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogController {
 
     @GetMapping("/all")
-    public void logAllLevels(String message) {
+    public void logAllLevels(@RequestParam(required = false) String message) {
         log.trace("trace {}", message);
         log.debug("debug {}", message);
         log.info("info {}", message);
